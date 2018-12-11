@@ -2,6 +2,7 @@ package com.github.pedrovgs.scalakatas.maxibons
 
 import cats.Monad
 import cats.implicits._
+import com.github.pedrovgs.scalakatas.maxibons.model.{Developer, World}
 import eu.timepit.refined.api.Refined.unsafeApply
 import eu.timepit.refined.auto._
 
@@ -14,12 +15,12 @@ final class KarumiHQs[F[_]: Monad](C: Chat[F]) {
 
   import KarumiHQs._
 
-  def openFridge(world: World, developers: Seq[Developer]): F[World] = developers match {
+  def openFridge(world: World, developers: List[Developer]): F[World] = developers match {
     case Nil => Monad[F].pure(world)
-    case dev :: rest =>
+    case dev :: tail =>
       for {
         headUpdatedWorld    <- openFridge(world, dev)
-        restOfTheDevelopers <- openFridge(headUpdatedWorld, rest)
+        restOfTheDevelopers <- openFridge(headUpdatedWorld, tail)
       } yield restOfTheDevelopers
   }
 

@@ -1,6 +1,7 @@
 package com.github.pedrovgs.scalakatas.maxibons
 
 import com.github.pedrovgs.scalakatas.maxibons.interpreters.SlackModule
+import com.github.pedrovgs.scalakatas.maxibons.model.{KarumiFridge, Karumies, World}
 
 object main extends App {
   override def main(args: Array[String]): Unit = {
@@ -10,7 +11,7 @@ object main extends App {
     val finalWorld = program
       .openFridge(
         initialWorld,
-        Seq(Karumies.pedro, Karumies.manolo, Karumies.tylos, Karumies.sarroyo, Karumies.sergio, Karumies.juanjo))
+        List(Karumies.pedro, Karumies.manolo, Karumies.tylos, Karumies.sarroyo, Karumies.sergio, Karumies.juanjo))
       .unsafeRunSync()
     println(s"Execution result " + finalWorld)
   }
