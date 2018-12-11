@@ -1,6 +1,6 @@
-# <img alt="Scala" src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" height="60"/> ScalaKatas [![Build Status](https://travis-ci.com/pedrovgs/ScalaKatas.svg?branch=master)](https://travis-ci.com/pedrovgs/ScalaKatas)
+# <img alt="Scala" src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" height="60"/> <img alt="Scala" src="https://typelevel.org/cats/img/cats-logo.png" height="60"/> ScalaKatas [![Build Status](https://travis-ci.com/pedrovgs/ScalaKatas.svg?branch=master)](https://travis-ci.com/pedrovgs/ScalaKatas)
 
-Scala training repository used to learn Scala and Functional Programming by solving some common katas using just purely functional programming with [Cats](https://github.com/typelevel/cats). ![Cats Friendly Badge](https://typelevel.org/cats/img/cats-badge-tiny.png)
+Scala training repository used to learn Scala and Functional Programming by solving some common katas using just purely functional programming with [Cats](https://github.com/typelevel/cats).
 
 ### List of katas:
 
