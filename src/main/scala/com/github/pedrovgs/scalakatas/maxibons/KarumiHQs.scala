@@ -6,7 +6,8 @@ import eu.timepit.refined.api.Refined.unsafeApply
 import eu.timepit.refined.auto._
 
 object KarumiHQs {
-  private val maxibonsToRefill = 10
+  val maxibonsToRefill    = 10
+  val minNumberOfMaxibons = 2
 }
 
 final class KarumiHQs[F[_]: Monad](C: Chat[F]) {
@@ -35,7 +36,7 @@ final class KarumiHQs[F[_]: Monad](C: Chat[F]) {
     }
 
   private def shouldRefillMaxibons(maxibonsLeft: Int): Boolean =
-    maxibonsLeft <= 2
+    maxibonsLeft <= minNumberOfMaxibons
 
   private def computeMaxibonsLeft(world: World, developer: Developer) =
     Math.max(0, world.karumiFridge.maxibonsLeft - developer.maxibonsToGrab)
