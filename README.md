@@ -1,6 +1,6 @@
-# ScalaKatas [![Build Status](https://travis-ci.com/pedrovgs/ScalaKatas.svg?branch=master)](https://travis-ci.com/pedrovgs/ScalaKatas)
+<img alt="Scala" src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" height="60"/> # ScalaKatas [![Build Status](https://travis-ci.com/pedrovgs/ScalaKatas.svg?branch=master)](https://travis-ci.com/pedrovgs/ScalaKatas)
 
-<img alt="Scala" src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" height="60"/>
+
 
 Scala training repository used to learn Scala and Functional Programming by solving some common katas using just purely functional programming.
 
