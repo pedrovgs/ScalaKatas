@@ -1,8 +1,6 @@
 # <img alt="Scala" src="https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png" height="60"/> ScalaKatas [![Build Status](https://travis-ci.com/pedrovgs/ScalaKatas.svg?branch=master)](https://travis-ci.com/pedrovgs/ScalaKatas)
 
-
-
-Scala training repository used to learn Scala and Functional Programming by solving some common katas using just purely functional programming.
+Scala training repository used to learn Scala and Functional Programming by solving some common katas using just purely functional programming with [Cats](https://github.com/typelevel/cats).
 
 ### List of katas:
 
@@ -17,7 +15,7 @@ sbt test-only *AnySpec // Runs specs matching with the filter passed as param.
 
 ### Checkstyle:
 
-For the project checkstyle we are using [ScalaFMT](https://scalameta.org/scalafmt/). The code format will be evaluated after accepting any contribution to this repository using this tool. You can easily format your code changes automatically by executing sbt format.
+For the project checkstyle we are using [ScalaFMT](https://scalameta.org/scalafmt/). The code format will be evaluated after accepting any contribution to this repository using this tool. You can easily format your code changes automatically by executing ``sbt format``.
 
 Developed By
 ------------
