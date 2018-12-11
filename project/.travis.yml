@@ -1,0 +1,22 @@
+language: scala
+scala:
+  - 2.12.8
+jdk:
+  - oraclejdk8
+
+services:
+  - mysql
+
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/boot/
+
+before_cache:
+  - find $HOME/.ivy2 -name "ivydata-*.properties" -delete
+  - find $HOME/.sbt -name "*.lock" -delete
+
+script:
+  - sbt scalafmt::test
+  - sbt test:scalafmt::test
+  - sbt test
