@@ -18,7 +18,6 @@ class MaxibonsSpec extends FlatSpec with Matchers with PropertyChecks with Arbit
   it should "always have more than 2 maxibons even if they go in groups" in {
     forAll { (world: World, developers: List[Developer]) =>
       val maxibonsLeft = openFridge(world, developers).karumiFridge.maxibonsLeft.value
-      println(s"=============> maxibons left $maxibonsLeft")
       maxibonsLeft should be > minNumberOfMaxibons
     }
   }

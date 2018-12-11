@@ -2,7 +2,7 @@ package com.github.pedrovgs.scalakatas.maxibons
 
 import com.github.pedrovgs.scalakatas.maxibons.model._
 import eu.timepit.refined.scalacheck.numeric._
-import org.scalacheck._
+import org.scalacheck.Arbitrary
 
 trait ArbitraryKarumiOffice {
 
