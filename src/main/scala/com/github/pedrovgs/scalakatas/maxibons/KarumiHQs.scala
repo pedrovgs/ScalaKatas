@@ -9,7 +9,7 @@ object KarumiHQs {
   private val maxibonsToRefill = 10
 }
 
-class KarumiHQs[F[_] : Monad](C: Chat[F]) {
+final class KarumiHQs[F[_]: Monad](C: Chat[F]) {
 
   import KarumiHQs._
 
@@ -17,7 +17,7 @@ class KarumiHQs[F[_] : Monad](C: Chat[F]) {
     case Nil => Monad[F].pure(world)
     case dev :: rest =>
       for {
-        headUpdatedWorld <- openFridge(world, dev)
+        headUpdatedWorld    <- openFridge(world, dev)
         restOfTheDevelopers <- openFridge(headUpdatedWorld, rest)
       } yield restOfTheDevelopers
   }
