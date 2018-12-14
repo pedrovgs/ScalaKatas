@@ -24,9 +24,17 @@ class MaxibonsSpec extends FlatSpec with Matchers with PropertyChecks with Arbit
 
   it should "ask for more maxibons using the chat client if we need to refill" in {
     forAll(arbitraryHungryDeveloper.arbitrary) { developer: Developer =>
-      val world        = World(new KarumiFridge())
-      val maxibonsLeft = openFridge(world, developer).karumiFridge.maxibonsLeft.value
-      maxibonsLeft should be > minNumberOfMaxibons
+      val world       = World(new KarumiFridge())
+      val messageSent = openFridgeAndGetChatMessageSent(world, developer)
+      messageSent shouldBe Some(s"Hi there! I'm ${developer.name}. We need more maxibons")
+    }
+  }
+
+  it should "not ask for more maxibons using the chat client if we don't need to refill" in {
+    forAll(arbitraryNotHungryDeveloper.arbitrary) { developer: Developer =>
+      val world       = World(new KarumiFridge())
+      val messageSent = openFridgeAndGetChatMessageSent(world, developer)
+      messageSent shouldBe None
     }
   }
 
@@ -44,5 +52,12 @@ class MaxibonsSpec extends FlatSpec with Matchers with PropertyChecks with Arbit
   private def openFridge(world: World, developers: List[Developer]): World = {
     val karumiHQs = new KarumiHQs(new SlackModule())
     karumiHQs.openFridge(world, developers).unsafeRunSync()
+  }
+
+  private def openFridgeAndGetChatMessageSent(world: World, developer: Developer): Option[String] = {
+    val chat      = new ChatMockModule()
+    val karumiHQs = new KarumiHQs(chat)
+    karumiHQs.openFridge(world, developer)
+    chat.messageSent
   }
 }

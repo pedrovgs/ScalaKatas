@@ -15,14 +15,8 @@ final class KarumiHQs[F[_]: Monad](C: Chat[F]) {
 
   import KarumiHQs._
 
-  def openFridge(world: World, developers: List[Developer]): F[World] = developers match {
-    case Nil => Monad[F].pure(world)
-    case dev :: tail =>
-      for {
-        headUpdatedWorld    <- openFridge(world, dev)
-        restOfTheDevelopers <- openFridge(headUpdatedWorld, tail)
-      } yield restOfTheDevelopers
-  }
+  def openFridge(world: World, developers: List[Developer]): F[World] =
+    developers.foldM(world)(openFridge)
 
   def openFridge(world: World, developer: Developer): F[World] =
     for {
