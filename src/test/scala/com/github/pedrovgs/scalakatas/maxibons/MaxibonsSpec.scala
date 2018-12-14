@@ -2,7 +2,7 @@ package com.github.pedrovgs.scalakatas.maxibons
 
 import com.github.pedrovgs.scalakatas.maxibons.KarumiHQs.{maxibonsToRefill, minNumberOfMaxibons}
 import com.github.pedrovgs.scalakatas.maxibons.interpreters.SlackModule
-import com.github.pedrovgs.scalakatas.maxibons.model.{Developer, KarumiFridge, World}
+import com.github.pedrovgs.scalakatas.maxibons.model.{Developer, KarumiFridge, Karumies, World}
 import org.scalatest.prop.PropertyChecks
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -36,6 +36,12 @@ class MaxibonsSpec extends FlatSpec with Matchers with PropertyChecks with Arbit
       val messageSent = openFridgeAndGetChatMessageSent(world, developer)
       messageSent shouldBe None
     }
+  }
+
+  it should "left the office with 6 maxibons left if Pedro and Manolo go to the fridge" in {
+    val world  = World(new KarumiFridge())
+    val fridge = openFridge(world, List(Karumies.pedro, Karumies.manolo)).karumiFridge
+    fridge.maxibonsLeft.value shouldBe 6
   }
 
   it should "use 2 as the min number of maxibons" in {
