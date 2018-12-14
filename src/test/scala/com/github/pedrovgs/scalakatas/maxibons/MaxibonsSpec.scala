@@ -2,7 +2,7 @@ package com.github.pedrovgs.scalakatas.maxibons
 
 import com.github.pedrovgs.scalakatas.maxibons.KarumiHQs.{maxibonsToRefill, minNumberOfMaxibons}
 import com.github.pedrovgs.scalakatas.maxibons.interpreters.SlackModule
-import com.github.pedrovgs.scalakatas.maxibons.model.{Developer, World}
+import com.github.pedrovgs.scalakatas.maxibons.model.{Developer, KarumiFridge, World}
 import org.scalatest.prop.PropertyChecks
 import org.scalatest.{FlatSpec, Matchers}
 
@@ -18,6 +18,14 @@ class MaxibonsSpec extends FlatSpec with Matchers with PropertyChecks with Arbit
   it should "always have more than 2 maxibons even if they go in groups" in {
     forAll { (world: World, developers: List[Developer]) =>
       val maxibonsLeft = openFridge(world, developers).karumiFridge.maxibonsLeft.value
+      maxibonsLeft should be > minNumberOfMaxibons
+    }
+  }
+
+  it should "ask for more maxibons using the chat client if we need to refill" in {
+    forAll(arbitraryHungryDeveloper.arbitrary) { developer: Developer =>
+      val world        = World(new KarumiFridge())
+      val maxibonsLeft = openFridge(world, developer).karumiFridge.maxibonsLeft.value
       maxibonsLeft should be > minNumberOfMaxibons
     }
   }
