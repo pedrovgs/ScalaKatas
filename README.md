@@ -4,6 +4,10 @@ Scala training repository used to learn Scala and Functional Programming by solv
 
 ### List of katas:
 
+| # | Kata Statement |  Pull Request |
+|---|----------------|---------------|
+| 1 | [Maxibons](https://github.com/Karumi/MaxibonKataJava#-kata-maxibon-for-java-) | [https://github.com/Karumi/ScalaKatas/pull/1](https://github.com/Karumi/ScalaKatas/pull/1) |
+
 ### Executing tests:
 
 This project contains some tests written using [ScalaTest](http://www.scalatest.org/) and [ScalaCheck](https://www.scalacheck.org/). You can easily run the tests by executing any of the following commands:
