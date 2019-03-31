@@ -13,9 +13,9 @@ object FormValidator {
 
   type FirstName       = Refined[String, NonEmpty]
   type LastName        = Refined[String, NonEmpty]
-  type ValidDocumentId = MatchesRegex[W.`"d{8}[a-zA-Z]{1}"`.T]
+  type ValidDocumentId = MatchesRegex[W.`"""\\d{8}[a-zA-Z]{1}"""`.T]
   type DocumentId      = Refined[String, ValidDocumentId]
-  type ValidPhone      = MatchesRegex[W.`"d{9}"`.T]
+  type ValidPhone      = MatchesRegex[W.`"""\\d{9}"""`.T]
   type Phone           = Refined[String, ValidPhone]
   type Email           = Refined[String, ValidEmail]
 
@@ -73,12 +73,12 @@ object FormValidator {
   private def validatePhone(phone: String): FormValidationResult[Phone] =
     Validated
       .fromEither(refineV[ValidPhone](phone))
-      .leftMap(_ => NonEmptyList.of(InvalidDocumentId(phone)))
+      .leftMap(_ => NonEmptyList.of(InvalidPhone(phone)))
 
   private def validateEmail(email: String): FormValidationResult[Email] =
     Validated
       .fromEither(refineV[ValidEmail](email))
-      .leftMap(_ => NonEmptyList.of(InvalidDocumentId(email)))
+      .leftMap(_ => NonEmptyList.of(InvalidEmail(email)))
 
 }
 
