@@ -10,7 +10,7 @@ scalacOptions += "-Ypartial-unification"
 
 libraryDependencies += "org.typelevel" %% "cats-core" % "1.5.0"
 libraryDependencies += "org.typelevel" %% "cats-effect" % "1.1.0"
-libraryDependencies += "eu.timepit" %% "refined" % "0.9.3"
+libraryDependencies += "eu.timepit" %% "refined" % "0.9.4"
 libraryDependencies += "com.github.julien-truffaut" %% "monocle-core" % "1.5.0"
 libraryDependencies += "com.github.julien-truffaut" %% "monocle-macro" % "1.5.0"
 
