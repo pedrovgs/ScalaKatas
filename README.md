@@ -4,9 +4,10 @@ Scala training repository used to learn Scala and Functional Programming by solv
 
 ### List of katas:
 
-| # | Kata Statement |  Pull Request |
-|---|----------------|---------------|
-| 1 | [Maxibons](https://github.com/Karumi/MaxibonKataJava#-kata-maxibon-for-java-) | [https://github.com/Karumi/ScalaKatas/pull/1](https://github.com/Karumi/ScalaKatas/pull/1) |
+| # | Kata Statement | PR | Topic |
+|---|----------------|----|-------|
+| 1 | [Maxibons](https://github.com/Karumi/MaxibonKataJava#-kata-maxibon-for-java-) | [https://github.com/Karumi/ScalaKatas/pull/1](https://github.com/Karumi/ScalaKatas/pull/1) | Polymorphic programming |
+| 2 | [Form validation](https://gist.github.com/pedrovgs/d83fe1f096928715a6f31946e557995a) | [https://github.com/Karumi/ScalaKatas/pull/2](https://github.com/Karumi/ScalaKatas/pull/2) | Validated data type|
 
 ### Executing tests:
 
