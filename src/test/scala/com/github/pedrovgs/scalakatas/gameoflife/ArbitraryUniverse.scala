@@ -1,4 +1,4 @@
-package com.github.pedrovgs.gameoflife
+package com.github.pedrovgs.scalakatas.gameoflife
 
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalacheck.Gen._

@@ -1,4 +1,4 @@
-package com.github.pedrovgs.gameoflife
+package com.github.pedrovgs.scalakatas.gameoflife
 
 import org.scalatest.prop.{PropertyChecks, TableDrivenPropertyChecks}
 import org.scalatest.{FlatSpec, Matchers}
@@ -12,9 +12,7 @@ class UniverseSpec extends FlatSpec with Matchers with PropertyChecks with Arbit
   private val knownScenarios = Table(
     ("Initial universe", "Expected universe", "Number of ticks"),
     (Universe(Map()), Universe(Map()), 1),
-    (Universe(Map(Position(1, 0) -> Cell.alive, Position(1, 1) -> Cell.alive)),
-     Universe(Map(Position(1, 0) -> Cell.dead, Position(1, 1)  -> Cell.dead)),
-     1),
+    (Universe(Map(Position(1, 0) -> Cell.alive, Position(1, 1) -> Cell.alive)), Universe(Map()), 1),
     (Universe(Map(Position(0, 1) -> Cell.alive, Position(1, 1) -> Cell.alive, Position(2, 1) -> Cell.alive)),
      Universe(Map(Position(1, 0) -> Cell.alive, Position(1, 1) -> Cell.alive, Position(1, 2) -> Cell.alive)),
      1),

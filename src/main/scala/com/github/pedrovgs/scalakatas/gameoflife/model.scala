@@ -53,11 +53,6 @@ object model {
       Universe(evolvedCells)
     }
 
-    override def equals(obj: Any): Boolean = this match {
-      case that: Universe => that.aliveCells == aliveCells
-      case _              => false
-    }
-
     override def toString: String = {
       val stringBuilder = new StringBuilder()
       (minX to maxX).foreach { x =>
