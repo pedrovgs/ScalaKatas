@@ -28,3 +28,8 @@ project/plugins/project/
 # IntelliJ
 
 .idea
+
+# Visual Studio
+.metals
+.bloop
+project/.bloop
