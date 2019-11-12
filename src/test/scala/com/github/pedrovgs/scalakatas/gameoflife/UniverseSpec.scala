@@ -48,7 +48,8 @@ class UniverseSpec extends FlatSpec with Matchers with PropertyChecks with Arbit
        )),
      4)
   )
-  private val anyNumberOfTicks = Gen.choose(1, 100)
+
+  private val anyNumberOfTicks = Gen.posNum[Int].suchThat(_ >= 1)
 
   it should "evaluate all the already known scenarios" in {
     forAll(knownScenarios) { (initialUniverse, expectedUniverse, numberOfTicks) =>

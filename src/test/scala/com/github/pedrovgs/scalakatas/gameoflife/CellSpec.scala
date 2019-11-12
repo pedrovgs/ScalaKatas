@@ -29,11 +29,15 @@ class CellSpec extends FlatSpec with Matchers with PropertyChecks with Arbitrary
     }
   }
 
-  it should "leave any dead cell as dead if the number of alive neigbors is not 2" in {
-    val anyNumberOfNeigborsButTwo = Gen.choose(0, Int.MaxValue).filter(_ != 2)
+  it should "leave any dead cell as dead if the number of alive neigbors is not 3" in {
+    val anyNumberOfNeigborsButTwo = Gen.choose(0, Int.MaxValue).filter(_ != 3)
     forAll(arbitraryCell.arbitrary, anyNumberOfNeigborsButTwo) { (cell: Cell, aliveNeigbors: Int) =>
       cell.evolve(aliveNeigbors) shouldBe dead
     }
+  }
+
+  it should "revive a dead cell if the number of alive neigbors is 3" in {
+    dead.evolve(3) shouldBe alive
   }
 
 }

@@ -8,8 +8,8 @@ trait ArbitraryUniverse extends ArbitraryCell {
 
   private val arbitraryPosition: Arbitrary[Position] = Arbitrary {
     for {
-      xPosition <- Gen.choose(-10000, 10000)
-      yPosition <- Gen.choose(-10000, 10000)
+      xPosition <- Arbitrary.arbitrary[Int]
+      yPosition <- Arbitrary.arbitrary[Int]
     } yield Position(xPosition, yPosition)
   }
 
@@ -36,7 +36,7 @@ trait ArbitraryUniverse extends ArbitraryCell {
 
   def arbitraryUniverseWithDeadCells(): Arbitrary[Universe] = Arbitrary {
     for {
-      numberOfDeadCells          <- Gen.choose(1, 100)
+      numberOfDeadCells          <- Gen.posNum[Int]
       cells: Map[Position, Cell] <- mapOfN(numberOfDeadCells, arbitraryDeadCellAtPosition.arbitrary)
     } yield Universe(cells)
   }

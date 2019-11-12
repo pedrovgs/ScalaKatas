@@ -54,8 +54,8 @@ object model {
     }
 
     override def equals(obj: Any): Boolean = this match {
-      case Universe(otherCells) => otherCells.filter(_._2.isAlive) == cells.filter(_._2.isAlive)
-      case _                    => false
+      case that: Universe => that.aliveCells == aliveCells
+      case _              => false
     }
 
     override def toString: String = {
@@ -64,8 +64,8 @@ object model {
         (minY to maxY).foreach { y =>
           val cell = cells.getOrElse(Position(x, y), Cell.dead)
           cell match {
-            case Cell(true) => stringBuilder.append("X")
-            case Cell.dead  => stringBuilder.append("_")
+            case Cell.alive => stringBuilder.append("X")
+            case _          => stringBuilder.append("_")
           }
         }
         stringBuilder.append("\n")
@@ -87,8 +87,8 @@ object model {
 
     def evolve(aliveNeighbors: Int): Cell =
       this match {
-        case Cell(true)  => evolveAliveCell(aliveNeighbors)
-        case Cell(false) => evolveDeadCell(aliveNeighbors)
+        case Cell.alive => evolveAliveCell(aliveNeighbors)
+        case _          => evolveDeadCell(aliveNeighbors)
       }
 
     private def evolveAliveCell(aliveNeighbors: Int): Cell =
