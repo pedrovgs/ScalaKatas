@@ -79,6 +79,15 @@ class UniverseSpec extends FlatSpec with Matchers with PropertyChecks with Arbit
     }
   }
 
+  it should "add new alive cell but remove the borders when the universe has an arrow" in {
+    forAll(arbitraryUniverseWithAnArrow().arbitrary) { universe =>
+      val theTipAndTheRevived = 2
+      withClue(s"arrow universe should revive a cell: $universe") {
+        tickUniverse(universe, 1).aliveCellsCount shouldBe theTipAndTheRevived
+      }
+    }
+  }
+
   @tailrec
   private def tickUniverse(universe: Universe, ticks: Int): Universe =
     if (ticks == 0) {
