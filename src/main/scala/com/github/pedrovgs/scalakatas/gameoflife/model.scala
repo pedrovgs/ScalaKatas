@@ -11,9 +11,10 @@ object model {
     lazy val bottomLeft: Position  = Position(x - 1, y + 1)
     lazy val bottom: Position      = Position(x, y + 1)
     lazy val bottomRight: Position = Position(x + 1, y + 1)
+
+    lazy val allNeighbors = Seq(topLeft, top, topRight, left, right, bottomLeft, bottom, bottomRight)
   }
   case class Universe(private val cells: Map[Position, Cell]) {
-
     private lazy val aliveCells      = cells.filter(_._2.isAlive)
     private lazy val minX            = if (aliveCells.isEmpty) 0 else aliveCells.minBy(_._1.x)._1.x - 1
     private lazy val minY            = if (aliveCells.isEmpty) 0 else aliveCells.minBy(_._1.y)._1.y - 1
@@ -23,16 +24,7 @@ object model {
     lazy val aliveCellsCount: Int    = aliveCells.count(_._2.isAlive)
     lazy val deadCellsCount: Int     = numberOfCellsCount - aliveCellsCount
 
-    def computeNeighbors(cellPosition: Position): Seq[Cell] = Seq(
-      getCellAtPosition(cellPosition.topLeft),
-      getCellAtPosition(cellPosition.top),
-      getCellAtPosition(cellPosition.topRight),
-      getCellAtPosition(cellPosition.left),
-      getCellAtPosition(cellPosition.right),
-      getCellAtPosition(cellPosition.bottomLeft),
-      getCellAtPosition(cellPosition.bottom),
-      getCellAtPosition(cellPosition.bottomRight)
-    )
+    def computeNeighbors(cellPosition: Position): Seq[Cell] = cellPosition.allNeighbors.map(getCellAtPosition)
 
     def tick(): Universe = {
       if (cells.isEmpty) {
@@ -75,9 +67,14 @@ object model {
   object Cell {
     val alive: Cell = Cell(isAlive = true)
     val dead: Cell  = Cell(isAlive = false)
+
+    def formStatus(isAlive: Boolean): Cell = {
+      if (isAlive) alive else dead
+    }
   }
   case class Cell(isAlive: Boolean) {
-    import Cell._
+    private final val NEIGHBORS_TO_BE_ALIVE = (2 to 3).toList
+
     val isDead: Boolean = !isAlive
 
     def evolve(aliveNeighbors: Int): Cell =
@@ -87,19 +84,9 @@ object model {
       }
 
     private def evolveAliveCell(aliveNeighbors: Int): Cell =
-      if (aliveNeighbors < 2) {
-        dead
-      } else if (aliveNeighbors == 2 || aliveNeighbors == 3) {
-        alive
-      } else {
-        dead
-      }
+      Cell.formStatus(NEIGHBORS_TO_BE_ALIVE.contains(aliveNeighbors))
 
     private def evolveDeadCell(aliveNeighbors: Int): Cell =
-      if (aliveNeighbors == 3) {
-        alive
-      } else {
-        dead
-      }
+      Cell.formStatus(aliveNeighbors == 3)
   }
 }
