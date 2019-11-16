@@ -1,13 +1,14 @@
 package com.github.pedrovgs.scalakatas.gameoflife
 
 import org.scalacheck.Arbitrary
-import com.github.pedrovgs.scalakatas.gameoflife.model.Cell
+import org.scalacheck.Gen
+import com.github.pedrovgs.scalakatas.gameoflife.model._
 
 trait ArbitraryCell {
   implicit val arbitraryCell: Arbitrary[Cell] = Arbitrary {
     for {
-      alive <- Arbitrary.arbitrary[Boolean]
-    } yield Cell(alive)
+      cell <- Gen.oneOf(Gen.const(Alive), Gen.const(Dead))
+    } yield cell
   }
 
 }

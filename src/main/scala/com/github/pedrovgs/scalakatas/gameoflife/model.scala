@@ -49,10 +49,10 @@ object model {
       val stringBuilder = new StringBuilder()
       (minX to maxX).foreach { x =>
         (minY to maxY).foreach { y =>
-          val cell = cells.getOrElse(Position(x, y), Cell.dead)
+          val cell = cells.getOrElse(Position(x, y), Dead)
           cell match {
-            case Cell.alive => stringBuilder.append("X")
-            case _          => stringBuilder.append("_")
+            case Alive => stringBuilder.append("X")
+            case Dead  => stringBuilder.append("_")
           }
         }
         stringBuilder.append("\n")
@@ -61,32 +61,37 @@ object model {
     }
 
     private def getCellAtPosition(cellPosition: Position) =
-      cells.getOrElse(cellPosition, Cell.dead)
+      cells.getOrElse(cellPosition, Dead)
   }
-
-  object Cell {
-    val alive: Cell = Cell(isAlive = true)
-    val dead: Cell  = Cell(isAlive = false)
-
-    def formStatus(isAlive: Boolean): Cell = {
-      if (isAlive) alive else dead
-    }
-  }
-  case class Cell(isAlive: Boolean) {
+  sealed trait Cell {
     private final val NEIGHBORS_TO_BE_ALIVE = (2 to 3).toList
 
+    val isAlive: Boolean = this match {
+      case Alive => true
+      case Dead  => false
+    }
     val isDead: Boolean = !isAlive
-
+    def formStatus(isAlive: Boolean): Cell = {
+      if (isAlive) Alive else Dead
+    }
     def evolve(aliveNeighbors: Int): Cell =
       this match {
-        case Cell.alive => evolveAliveCell(aliveNeighbors)
-        case _          => evolveDeadCell(aliveNeighbors)
+        case Alive => evolveAliveCell(aliveNeighbors)
+        case Dead  => evolveDeadCell(aliveNeighbors)
       }
 
+    private def fromStatus(alive: Boolean) = alive match {
+      case true  => Alive
+      case false => Dead
+    }
+
     private def evolveAliveCell(aliveNeighbors: Int): Cell =
-      Cell.formStatus(NEIGHBORS_TO_BE_ALIVE.contains(aliveNeighbors))
+      formStatus(NEIGHBORS_TO_BE_ALIVE.contains(aliveNeighbors))
 
     private def evolveDeadCell(aliveNeighbors: Int): Cell =
-      Cell.formStatus(aliveNeighbors == 3)
+      formStatus(aliveNeighbors == 3)
   }
+  object Alive extends Cell
+  object Dead  extends Cell
+
 }

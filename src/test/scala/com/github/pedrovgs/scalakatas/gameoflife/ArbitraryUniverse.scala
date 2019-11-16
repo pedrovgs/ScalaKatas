@@ -2,7 +2,7 @@ package com.github.pedrovgs.scalakatas.gameoflife
 
 import org.scalacheck.{Arbitrary, Gen}
 import org.scalacheck.Gen._
-import com.github.pedrovgs.scalakatas.gameoflife.model.{Cell, Position, Universe}
+import com.github.pedrovgs.scalakatas.gameoflife.model._
 
 trait ArbitraryUniverse extends ArbitraryCell {
 
@@ -61,21 +61,21 @@ trait ArbitraryUniverse extends ArbitraryCell {
   def arbitraryUniverseWithAnArrow(): Arbitrary[Universe] = Arbitrary {
     for {
       arrow <- arrow.arbitrary
-      cells = arrow.map(_ -> Cell.alive).toMap
+      cells = arrow.map(_ -> Alive).toMap
     } yield Universe(cells)
   }
 
   private val arbitraryAliveCellAtPosition: Arbitrary[(Position, Cell)] = Arbitrary {
     for {
       position <- arbitraryPosition.arbitrary
-      cell     <- Gen.const(Cell.alive)
+      cell     <- Gen.const(Alive)
     } yield (position, cell)
   }
 
   private val arbitraryDeadCellAtPosition: Arbitrary[(Position, Cell)] = Arbitrary {
     for {
       position <- arbitraryPosition.arbitrary
-      cell     <- Gen.const(Cell.dead)
+      cell     <- Gen.const(Dead)
     } yield (position, cell)
   }
 }

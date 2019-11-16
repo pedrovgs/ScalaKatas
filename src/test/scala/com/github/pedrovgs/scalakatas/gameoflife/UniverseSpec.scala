@@ -2,7 +2,7 @@ package com.github.pedrovgs.scalakatas.gameoflife
 
 import org.scalatest.prop.{PropertyChecks, TableDrivenPropertyChecks}
 import org.scalatest.{FlatSpec, Matchers}
-import com.github.pedrovgs.scalakatas.gameoflife.model.{Cell, Position, Universe}
+import com.github.pedrovgs.scalakatas.gameoflife.model._
 import org.scalacheck.Gen
 
 import scala.annotation.tailrec
@@ -12,37 +12,25 @@ class UniverseSpec extends FlatSpec with Matchers with PropertyChecks with Arbit
   private val knownScenarios = Table(
     ("Initial universe", "Expected universe", "Number of ticks"),
     (Universe(Map()), Universe(Map()), 1),
-    (Universe(Map(Position(1, 0) -> Cell.alive, Position(1, 1) -> Cell.alive)), Universe(Map()), 1),
-    (Universe(Map(Position(0, 1) -> Cell.alive, Position(1, 1) -> Cell.alive, Position(2, 1) -> Cell.alive)),
-     Universe(Map(Position(1, 0) -> Cell.alive, Position(1, 1) -> Cell.alive, Position(1, 2) -> Cell.alive)),
+    (Universe(Map(Position(1, 0) -> Alive, Position(1, 1) -> Alive)), Universe(Map()), 1),
+    (Universe(Map(Position(0, 1) -> Alive, Position(1, 1) -> Alive, Position(2, 1) -> Alive)),
+     Universe(Map(Position(1, 0) -> Alive, Position(1, 1) -> Alive, Position(1, 2) -> Alive)),
      1),
-    (Universe(Map(Position(1, 0) -> Cell.alive, Position(1, 1) -> Cell.alive, Position(1, 2) -> Cell.alive)),
-     Universe(Map(Position(0, 1) -> Cell.alive, Position(1, 1) -> Cell.alive, Position(2, 1) -> Cell.alive)),
+    (Universe(Map(Position(1, 0) -> Alive, Position(1, 1) -> Alive, Position(1, 2) -> Alive)),
+     Universe(Map(Position(0, 1) -> Alive, Position(1, 1) -> Alive, Position(2, 1) -> Alive)),
      1),
-    (Universe(
-       Map(Position(0, 1) -> Cell.alive,
-           Position(1, 1) -> Cell.alive,
-           Position(2, 1) -> Cell.alive,
-           Position(2, 2) -> Cell.alive)),
-     Universe(
-       Map(Position(1, 0) -> Cell.alive,
-           Position(1, 1) -> Cell.alive,
-           Position(2, 1) -> Cell.alive,
-           Position(2, 2) -> Cell.alive)),
+    (Universe(Map(Position(0, 1) -> Alive, Position(1, 1) -> Alive, Position(2, 1) -> Alive, Position(2, 2) -> Alive)),
+     Universe(Map(Position(1, 0) -> Alive, Position(1, 1) -> Alive, Position(2, 1) -> Alive, Position(2, 2) -> Alive)),
      1),
-    (Universe(
-       Map(Position(2, 2) -> Cell.alive,
-           Position(3, 2) -> Cell.alive,
-           Position(4, 2) -> Cell.alive,
-           Position(4, 3) -> Cell.alive)),
+    (Universe(Map(Position(2, 2) -> Alive, Position(3, 2) -> Alive, Position(4, 2) -> Alive, Position(4, 3) -> Alive)),
      Universe(
        Map(
-         Position(2, 2) -> Cell.alive,
-         Position(3, 1) -> Cell.alive,
-         Position(3, 3) -> Cell.alive,
-         Position(4, 1) -> Cell.alive,
-         Position(4, 3) -> Cell.alive,
-         Position(5, 2) -> Cell.alive
+         Position(2, 2) -> Alive,
+         Position(3, 1) -> Alive,
+         Position(3, 3) -> Alive,
+         Position(4, 1) -> Alive,
+         Position(4, 3) -> Alive,
+         Position(5, 2) -> Alive
        )),
      4)
   )
